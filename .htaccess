@@ -1,0 +1,15 @@
+php_flag display_errors Off
+
+<IfDefine MYCET_LOKALNY_SERVER>
+php_flag display_errors On
+php_flag html_errors On
+php_value error_reporting 6143
+<IfDefine MYCET_LOKALNY_SERVER>
+
+RewriteEngine On
+<IfDefine MYCET_LOKALNY_SERVER>
+RewriteBase /mycet
+</IfDefine>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ profile.php?username=$1 [QSA]

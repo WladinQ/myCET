@@ -1,0 +1,59 @@
+<div id="container">
+<div id="members">
+	<div id="search">
+		Pohlaví: 
+		<select name="sex">
+			<option value="">-- Na pohlaví nezáleží --</option>
+			<option value="muz">Muž</option>
+			<option value="zena">Žena</option>
+		</select>
+		Kraj: 
+		<select name="">
+				<option value="">-- Všechny kraje --</option>
+				<option value="c0">Česká republika</option>
+				<option value="c1">- Hlavní město Praha</option>
+				<option value="c2">- Jihočeský kraj</option>
+				<option value="c3">- Jihomoravský kraj</option>
+				<option value="c4">- Karlovarský kraj</option>
+				<option value="c5">- Královehradecký kraj</option>
+				<option value="c6">- Liberecký kraj</option>
+				<option value="c7">- Moravskoslezský kraj</option>
+				<option value="c8">- Olomoucký kraj</option>
+				<option value="c9">- Pardubický kraj</option>
+				<option value="c10">- Plzeňský kraj</option>
+				<option value="c11">- Středočeský kraj</option>
+				<option value="c12">- Ústecký kraj</option>
+				<option value="c13">- Vysočina</option>
+				<option value="c14">- Zlínský kraj</option>
+						
+				<option value="s0">Slovenská republika</option>
+				<option value="s1">- Banskobystrický kraj</option>
+				<option value="s2">- Bratislavský kraj</option>
+				<option value="s3">- Košický kraj</option>
+				<option value="s4">- Nitriansky kraj</option>
+				<option value="s5">- Prešovský kraj</option>
+				<option value="s6">- Trnavský kraj</option>
+				<option value="s7">- Trenčiansky kraj</option>
+				<option value="s8">- Žilinský kraj</option>
+			</select>
+			Ve věku od: <input type="text" maxlength="2"> do: <input type="text" maxlength="2">
+			<input type="submit" value="Filtrovat">
+	</div>
+	
+	<div id="users">
+		<table border="0px" n:foreach="$users as $user">
+			<tr>
+				<td rowspan="3" width="100px" valign="top"><a href="{$user['username']}"><img src="{$user['profile']}"></a></td>
+				<td valign="top"><h3><a href="{$user['username']}">{$user['username']}</a></h3></td>
+				<td rowspan="3" valign="middle" width="100px"><a class="membersmsg" href="send_msg.php?user={$user['user_id']}">Poslat zprávu</a> <a class="membersmsgadd" href="">Přidat přítele</a> <input type="submit" name="report-profile" value="Nahlásit profil"></td>
+			</tr>
+			<tr>
+				<td valign="top" width="auto">{$user['sex']}, {$user['bday']} let, {$user['okres']}</td>
+			</tr>
+			<tr>
+			  <td valign="bottom">{$user['vztah']}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="clear"></div>
+</div>

@@ -1,0 +1,79 @@
+<div id="container-reg">
+	<div id="registrace">
+		<h2>Registrace</h2>
+		<div class="left">
+			<form action="" method="post">
+				
+				{$status|noescape}
+				<input type="text" name="username" placeholder="Užívatelské jméno" autocomplete="off"><br>
+				<input type="password" name="password" placeholder="Heslo" autocomplete="off"><br>
+				<input type="password" name="password_recover" placeholder="Heslo (pro kontrolu)" autocomplete="off"><br>
+				<input type="text" name="email" placeholder="E-mail" autocomplete="off"><br>
+				<b>Datum narození:</b><br>
+				<input type="date" name="bday" style="padding: 5px; border: 2px solid #425691; margin: 5px 0 2px 0; width: 94%; background-color: #F8F8FF;"><br>
+				<select name="okres">
+					<option value="">- kraj -</option>
+							
+					<option value="c0">Česká republika</option>
+					<option value="c1">- Hlavní město Praha</option>
+					<option value="c2">- Jihočeský kraj</option>
+					<option value="c3">- Jihomoravský kraj</option>
+					<option value="c4">- Karlovarský kraj</option>
+					<option value="c5">- Královehradecký kraj</option>
+					<option value="c6">- Liberecký kraj</option>
+					<option value="c7">- Moravskoslezský kraj</option>
+					<option value="c8">- Olomoucký kraj</option>
+					<option value="c9">- Pardubický kraj</option>
+					<option value="c10">- Plzeňský kraj</option>
+					<option value="c11">- Středočeský kraj</option>
+					<option value="c12">- Ústecký kraj</option>
+					<option value="c13">- Vysočina</option>
+					<option value="c14">- Zlínský kraj</option>
+							
+					<option value="s0">Slovenská republika</option>
+					<option value="s1">- Banskobystrický kraj</option>
+					<option value="s2">- Bratislavský kraj</option>
+					<option value="s3">- Košický kraj</option>
+					<option value="s4">- Nitriansky kraj</option>
+					<option value="s5">- Prešovský kraj</option>
+					<option value="s6">- Trnavský kraj</option>
+					<option value="s7">- Trenčiansky kraj</option>
+					<option value="s8">- Žilinský kraj</option>
+				</select><br>
+				<font style="font-style: normal;"><input type="radio" name="sex" value="zena"> Žena <input type="radio" name="sex" value="muz"> Muž</font><br>
+				<input type="checkbox" name="checkbox" value="yes" required> <font style="font-style: normal;">Souhlasím s <a href="">pravidly a podmínkama</a>.</font><br>
+				
+				<div style="display:none">
+					<input type="text" name="profile" value="images/profile/imagenotfound.jpg" autocomplete="off">
+					<input type="text" name="status" value="Napiš, co právě děláš..." autocomplete="off">
+					<select name="vztah"><option value="free" selected="selected">free</option></select>
+				</div>
+				
+				<input type="submit" name="submit" value="Zaregistrovat se">
+			</form>
+		</div>
+		<div class="left2">
+			<center><b>Co všechno se dá dělat po registraci?</b></center><br>
+			<script src="js/js-image-slider.js" type="text/javascript"></script>
+			<div id="sliderFrame">
+				<div id="slider">
+					<img src="images/registrace/registrace1.png" alt="zvolit si partnerský stav" />
+					<img src="images/registrace/registrace2.png" alt="vyplnit si informace o sobě" />
+					<img src="images/registrace/registrace3.png" alt="přidávat videa a fotografie do alb" />
+					<img src="images/registrace/registrace4.png" alt="posílat zprávy nebo chatovat v místnostech" />
+					<img src="images/registrace/registrace5.png" alt="uživatelé si přidat do přátel nebo jen sledovat" />
+					<img src="images/registrace/registrace6.png" alt="přidávat příspěvky na nástěnku sobě nebo přátelům" />
+					<!--img src="images/registrace/registrace.png" alt='komentovat příspěvky, označovat příspěveky "Líbi se mi to"' /-->
+				</div>
+				<div id="htmlcaption" style="display: none;">
+					
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<p><a href="">Pravidla a podmínky</a></p>
+			<p><a href="kontakt.php">Mám dotaz, potřebuji poradit</a></p>
+			<p>PASTI s.r.o. | myČET 2015</p>
+		</div>
+		<div class="clear"></div>
+	</div>

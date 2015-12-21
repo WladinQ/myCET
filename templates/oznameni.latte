@@ -1,0 +1,40 @@
+<div id="container">
+<div id="notices">
+	<div id="notices-menu">
+		<a href="oznameni.php"><h2>Oznámení ({$celkovo})</h2></a>
+		<img src="images/friend-request.png"> <a href="?zadosti-o-pratelstvi"> Žádosti o přátelství ({$notices})</a><br><br>
+		<img src="images/like.png"> <a href="?libi-se-mi-to">Líbi se mi to ({$my_like_post})</a><br><br>
+		<img src="images/post.png"> <a href="">Komentáře (0)</a>
+	</div>
+	<div id="notices-right">
+		{if $typ == "zadosti"}
+			<h2>Žádosti o přátelství ({$notices})</h2>
+
+			{if count($requests) == 0}
+				<p>Nemáte žádné žádosti o přátelství.</p>
+			{else}
+				<table border='0px' n:foreach="$requests as $request">
+					<tr>
+						<td rowspan='2'><a href='{$request["users2"]}'><img src='{$request["photo"]}'></a></td>
+						<td colspan='2' style='padding: 5px;'>dne {$request["date2"]} o {$request["time"]}</td>
+					</tr>
+					<tr>
+						<td style='padding: 5px 5px 0px 5px;' width='480px'>Uživatel <a href='{$request["users2"]}'>{$request["users2"]}</a> Vám odeslal žádost o přátelství.<br><input type='text' name='odpoved' placeholder='Odpovědět zprávou...'> <input type='submit' name='odeslat' value='Odeslat zprávu'></td>
+						<td width='350px' valign='bottom' style='padding-bottom: 3px;'><input type='submit' name='report-profile' value='Nahlásit profil'> <input type='submit' name='ignorovat' value='Ignorovat'> <input type='submit' name='pridat' value='Přidat přítele'></td>
+					</tr>
+				</table>
+			{/if}
+		{elseif $typ == "libi"}
+			<h2>Líbi se mi to ({$my_like_post})</h2>
+
+			{if count($likes) == 0}
+				<p>Nic</p>
+			{else}
+				<p n:foreach="$likes as $like">
+					Užívatel <a href='$like["username"]'>$like["username"]</a> sa líbi váš <a href='$like["my_username"]?nastenka/post_id=$like["id_post"]'>post</a><br><hr/>
+				</p>
+			{/if}
+		{/if}
+	</div>
+	<div class="clear"></div>
+</div>

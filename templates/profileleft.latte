@@ -1,0 +1,54 @@
+<div class="profile2img">
+	<a href="{$profile_data['profile']}" class="thickbox">
+		<img src="{$profile_data['profile']}" alt="Profilový obrázek {$profile_data['username']}" title="Profilový obrázek {$profile_data['username']}">
+	</a>
+			
+  {if $prihlasen}
+		<center>
+			<a class="inputsubmitbuttons2" href="change-avatar.php">Nahrát profilovou fotku</a><br><br>
+			
+		<form method="post">
+      {if $smazanaFotka}
+        <div class='accepted_foto'>Profilová fotka smazána.<br><br><a href='{$profile_data["username"]}'>Obnovit stránku</a><br><br></div>
+      {/if}
+			<input type="submit" name="smazat-foto" value="Smazat fotku">
+		</form>
+		</center>
+  {/if}
+  {if $friendandmsg}
+	<div id="friendandmsg">
+			{if ($Reqfriend == 0)}
+						<form method="post">
+							<input type='submit' name='addfriend' value='Přidat přítele'> <a href="send_msg.php?user={$user_id}" name="sendmsg">Poslat zprávu</a>
+						</form>
+				{else}
+					<br><div class='accepted_friends'>Žádost o přátelství odeslána.</div><input type='submit' name='closereq' value='Zrušit žádost'> <a href='send_msg.php?user={$user_id}' name='sendmsg'>Poslat zprávu</a>
+        {/if}
+	</div>
+  {/if}
+	<div id="vote_users">
+	  {if ($prihlasen)}
+    {* len na prihlasonom profile a len na mojom *}
+  	  <center>
+  	    {if ($numrows_info == 0)}
+  					<form method="post">
+              {if $zapojenHlasovani}
+      	       <div class='accepted_foto'>Váš profil byl zapojen do hlasování.<br><br><a href='{$profile_data["username"]}'>Obnovit stránku</a><br><br></div>
+             {else}
+          	   <input type="submit" name="create_vote" value="Zapojit svůj profil do hlasování">
+             {/if}
+            </form>
+  				{else if ($numrows_info != 0)}
+  				  <form method="post">
+      	      {if $odstranenHlasovani}
+          				<div class='accepted_foto'>Váš profil byl odstraněn z hlasování.<br><br><a href='{$profile_data["username"]}'>Obnovit stránku</a><br><br></div>
+              {else}
+                <input type="submit" name="delete_vote" value="Odstranit profil z hlasování">
+          		{/if}              
+            </form>
+  				{/if}
+      </center>
+    {/if}
+    {$hlasovani}
+  </div>
+</div>

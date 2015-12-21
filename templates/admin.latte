@@ -1,0 +1,128 @@
+<div id="container">
+<div id="admin_table">
+  <table border="0px">
+    <tr>
+      <td>
+        <a href="?aktivace-deaktivace">
+          <div class="a-d_users">
+            <h3>aktivace a deaktivace</h3>
+			
+          </div>
+        </a>
+      </td>
+      <td>
+        <a href="?blokovany-uzivatele">
+          <div class="block_users">
+            <h3>blokovaný uživatelé</h3>
+			
+          </div>
+        </a>
+      </td>
+	  <td>
+        <a href="?chat">
+          <div class="chat">
+            <h3>chat</h3>
+			
+          </div>
+        </a>
+      </td>
+      <td>
+        <a href="?nahlaseni-profilu">
+          <div class="ban_users">
+            <h3>nahlásení profilu</h3>
+			<h1>{$pocet_nahlaseni}</h1>
+          </div>
+        </a>
+      </td>
+      <td>
+        <a href="?poslat-vsem-email">
+          <div class="send_email">
+            <h3>post všem e-mail</h3>
+			
+          </div>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="admin_vyber">
+	{if $typ == "aktivace"}
+		<div class="">
+			<h2>Aktivace a deaktivace</h2>
+		</div>
+	{/if}
+	{if $typ == "blokovany"}
+		<div class="">
+			<h2>Blokovaný uživatelé</h2>
+		</div>
+	{/if}
+	{if $typ == "chat"}
+		<div class="chat">
+			<h2>Chat</h2>
+			<!-- medzičasť -->
+				<h3>Kategorie ({$pocet_kategorii})</h3>
+				Zoznam: 
+				<span n:foreach="$kategorie as $kat">{$kat["id"]} = <b>{$kat["jmeno_kategorie"]}</b></span>
+				<form method="post">
+					<input type="text" name="jmeno_kategorie" placeholder="Jméno kategorie:"> 
+					<input type="submit" name="submit_k" value="Přidat kategorii"><br>
+					{$uspech}
+				</form>
+				<hr/>
+				<h3>Místnosti ({$pocet_mistnosti})</h3>
+				<form method="post">
+					<input type="text" name="jmeno_mistnosti" placeholder="Jméno místnosti:">
+					<select name="kategorie_mistnosti">
+						<option value="">- kategorie -</option>
+								
+						<option value="1">Česká republika</option>
+						<option value="2">Slovenská republika</option>
+						<option value="3">Zájmy</option>
+						<option value="4">Zahraničí</option>
+					</select>
+					<input type="submit" name="submit_m" value="Přidat místnost"><br><br>
+					{$uspech}
+				</form>
+				Zoznam:<br><br>
+
+				<div n:foreach="$kategorieMistnosti as $kat">{$kat["kategorie_mistnosti"]} = <b>{$kat["jmeno_mistnosti"]}</b></div>
+			<!-- medzičasť -->
+		</div>
+	{/if}
+	{if $typ == "nahlaseni"}
+		{if $opravnenyAdmin}
+    		<div class="admin-nahlaseni">
+    			<h2>Nahlásení profilu</h2>
+    			{if $nahlaseni && count($nahlaseni)}
+				<div n:foreach="$nahlaseni as $nahlasen">dne {$nahlasen["date"]} <br><br>Uživatel <b>{$kat["koho"]}</b> nahlásil profil uživatela <a href='{$kat["kto"]}'>{$kat["kto"]}</a>.<hr/></div>
+    			{else}
+    				Nic není nahlášeno
+    			{/if}
+		    </div>
+		{/if}
+  	{/if}
+	{if $typ == "poslat"}
+    <h2>Poslat všem e-mail</h2>
+		{if $success}	  
+			<div class="accepted_mail">E-maily byly odeslány!</div>
+		{else}
+			{$errors}		
+    	{/if}
+		<form action="" method="post">
+			<table border="0px">
+				<tr>
+					<td>Předmět:</td>
+					<td><input type="text" name="subject" value="Oznameni"></td>
+				</tr>
+				<tr>
+					<td>Správa:</td>
+					<td><textarea name="body"></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input class="inputsubmitbuttons" type="submit" value="Odeslat e-maily"></td>
+				</tr>
+			</table>
+		</form>
+  {/if}
+</div>

@@ -1,0 +1,157 @@
+<div id="container">
+<div id="messages_users">
+	<div class="search">
+		<input type="text" name="search" placeholder="Hledat uživatele...">
+	</div>
+	<div class="users">
+		<table border='0px' width='100%' n:foreach="$users as $user">
+			<tr>
+				<td valign='middle' width='30px'><a href='messages.php?hash={$user["hash"]}'><img src='{$user["select_user_profile"]}'></a></td>
+				<td width='2px'></td>
+				<td valign='middle'><a href='messages.php?hash={$user["hash"]}'>{$user["select_username"]}</a></td>
+				<td style='text-align: right;' width='90px'>({$user["pocet"]}) <a href='' title='Odstranit konverzaci'>[x]</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="delete-newmessage">
+		<input type="submit" name="new-message" value="Napsat novou zprávu"> <!--input type="submit" name="delete-all-messages" value="Smazat všechny zprávy"-->
+	</div>
+</div>
+<div id="messages">
+	<div class="conversations">
+		{if count($messages)} 
+			<div class='conversation_user' n:foreach="$messages as $message">
+				<div class='msg_left'>
+					<a href='{$message["from_username"]}'>{$message["from_username"]}</a>
+				</div>
+				<div class='msg_right'>
+					dne {$message["date2"]} o {$message["time"]}
+				</div>
+				<div class='clear'></div>
+				<div class='msg'>
+					{$message["message2"]|noescape}
+				</div>
+			</div>
+		{else}
+			<br><br><br><br><br><br><br><center><h3>Není vybrána žádná konverzace</h3><br>vyberte konverzaci nalevo &#x2022; <a href="">napsat novou zprávu</a></center>
+		{/if}
+		
+	</div>
+	<div class="send_messages">
+		<script type="text/javascript">
+			function smajlik(smajlik) {
+			  document.forms.vzkaz.message.focus();
+			  document.forms.vzkaz.message.value=
+			  document.forms.vzkaz.message.value+smajlik
+			}
+		</script>
+		<form method="post" id="vzkaz">
+
+		{if count($messages)} 
+				<img src="images/emotikony/smajl_1.png" onclick="smajlik(':-)')" alt=":-)" />
+				<img src="images/emotikony/smajl_2.png" onclick="smajlik(':-(')" alt=":-(" />
+				<img src="images/emotikony/smajl_3.png" onclick="smajlik(':-/')" alt=":-/" />
+				<img src="images/emotikony/smajl_4.png" onclick="smajlik(';-)')" alt=";-)" />
+				<img src="images/emotikony/smajl_5.png" onclick="smajlik(':-P')" alt=":-P" />
+				<img src="images/emotikony/smajl_6.png" onclick="smajlik(':-D')" alt=":-D" />
+				<img src="images/emotikony/smajl_7.png" onclick="smajlik(':´-(')" alt=":´-(" />
+				<img src="images/emotikony/smajl_8.png" onclick="smajlik(':-O')" alt=":-O" />
+				<img src="images/emotikony/smajl_9.png" onclick="smajlik(':-X')" alt=":-X" />
+				<img src="images/emotikony/smajl_10.png" onclick="smajlik('B-)')" alt="B-)" />
+				<img src="images/emotikony/smajl_11.png" onclick="smajlik(':[')" alt=":[" />
+				<!--img src="images/emotikony/smajl_12.png" onclick="smajlik('>:-(')" alt=">:(" /-->
+				<img src="images/emotikony/smajl_13.png" onclick="smajlik(':-*')" alt=":-*" />
+				<img src="images/emotikony/smajl_16.png" onclick="smajlik(':-o')" alt=":-o" />
+				<img src="images/emotikony/smajl_18.png" onclick="smajlik(':´-|')" alt=":´-|" />
+				<img src="images/emotikony/smajl_19.png" onclick="smajlik('o_O')" alt="o_O" />
+				<img src="images/emotikony/smajl_20.png" onclick="smajlik(':-$')" alt=":-$" />
+				<img src="images/emotikony/smajl_21.png" onclick="smajlik('Z:-|')" alt="Z:-|" />
+				<!--img src="images/emotikony/smajl_22.png" onclick="smajlik('>:-/')" alt=">:-/" /-->
+				<img src="images/emotikony/smajl_25.png" onclick="smajlik('[:zip:]')" alt="[:zip:]" />
+				<img src="images/emotikony/smajl_17.png" onclick="smajlik('<3')" alt="<3" />
+				<img src="images/emotikony/smajl_23.png" onclick="smajlik('</3')" alt="</3" />
+				<br>
+				<input type='text' name='message' placeholder='Napsat zprávu...' autocomplete='off' maxlength='60'>
+		{/if}
+		</form>
+	</div>
+</div>
+<div class="clear"></div>
+
+{var $lastMsgId = 0}
+<script>var lastMsgId = {$lastMsgId};</script>
+<script n:syntax="off">
+(function(period, multiplier) {
+	if(!window.JSON) return;
+	var basePeriod = period;
+	var isActive = false;
+	
+	(function watchMessages() {
+		if(isActive) {
+			watch();
+			return;
+		}
+		isActive = true;
+		pingMessageService();
+		watch();
+		period *= multiplier;
+
+		function watch() {
+			window.setTimeout(watchMessages, period);
+		}
+	})();
+	
+	function pingMessageService() {
+		var xhr = new window.XMLHttpRequest() || new window.ActiveXObject('Microsoft.XMLHTTP');
+		if(!xhr) return;
+		
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState != xhr.DONE) {
+				return;
+			}
+
+			fetchMessages.call(JSON.parse(xhr.responseText));
+			isActive = false;
+		}
+		
+		xhr.open('POST', 'messages-ping.php');
+		xhr.send(null);
+	}
+	
+	/**
+	 * XMLHttpRequest.onreadystatechange callback
+	 *
+	 * Expects {this} to be a plain object with structure:
+	 *
+	 * {
+	 *   isUnread: {Boolean},
+	 *   lastMsgId: {Number},
+	 *   messages: [
+	 *     {
+	 *       author: {String},
+	 *       date: {String},
+	 *       message: {String}
+	 *     },
+	 *     {
+	 *       ...
+	 *     },
+	 *     ...
+	 *   ]
+	 * }
+	 *
+	 * or, in case of error:
+	 *
+	 * {
+	 *   error: {
+	 *     message: {String},
+	 *     code: {Number}
+	 *   }
+	 * }
+	 *
+	 */
+	function fetchMessages() {
+		if(this.error) return;
+		console.log(this);
+	}
+})(2, 1.15)
+</script>

@@ -1,0 +1,31 @@
+<?php
+
+// mysqli.database-connection connector
+// 
+if(!function_exists('getMySQLiDatabaseConnectionObject')) {
+	function getMySQLiDatabaseConnectionObject() {
+		static $mysqli;
+
+		if(!$mysqli instanceof \mysqli) {
+			$new = new \mysqli(
+				'localhost',
+				'skmycet',
+				'145AEF8774',
+				'skmycet'
+			);
+
+			if($new->connect_errno)
+				// svinstvo, ale čo už
+				die('Je nám líto, máme problémy s připojením.');
+
+			// $new->autocommit(true);
+
+			// priradím novú persistentnú inštanciu
+			$mysqli = $new;
+		}
+
+		return $mysqli;
+	}
+}
+
+return getMySQLiDatabaseConnectionObject();

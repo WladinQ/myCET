@@ -1,0 +1,9 @@
+{if $status}
+	<h2>Děkujeme, váš účet byl aktivován.</h2>
+	<p>Nyní se můžete přihlásit...</p>
+{else}
+	<h2>Oops...</h2>
+	{if $errors} 
+		{$errors|noescape}
+	{/if}
+{/if}

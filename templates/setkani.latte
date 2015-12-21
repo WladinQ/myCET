@@ -1,0 +1,16 @@
+<div id="container">
+
+<div id="meeting">
+
+	<div n:foreach="$items as $item">
+		<!-- Dočasný výpis -->
+		<!-- toto php na zobrazenie hlasovania obsahuje fotku = $photo meno = $users pocet bodov = $total a pocet hlasov = $votes -->
+		<h2>{$item["users"]}</h2>
+		<img src="{$item["photo"]}">
+		<ul>
+			<li>{$item["total"]}</li>
+			<li>{$item["votes"]}</li>
+		</ul>
+	</div>
+
+</div>

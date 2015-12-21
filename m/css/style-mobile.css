@@ -1,0 +1,97 @@
+header {
+	background-color: #4D68A1;
+	margin: 0 0 3% 0;
+	height: 220px;
+}
+
+header img {
+	width: 40%;
+	height: auto;
+	margin: 5% 0 5% 0;
+}
+
+body {
+	width: 100%;
+	margin: 0 auto 0 auto;
+	text-align: center;
+	font-size: 30px;
+	background-color: #E8E8E8;
+}
+
+#login {
+	width: 100%;
+	font-size: 35px;
+}
+
+#login input[type="text"] {
+	width: 90%;
+	height: auto;
+	padding: 2%;
+	font-size: 35px;
+	border: 4px solid #425691;
+}
+
+#login input[type="password"] {
+	width: 90%;
+	height: auto;
+	padding: 2%;
+	font-size: 35px;
+	border: 4px solid #425691;
+	margin: 2% 0 2% 0;
+}
+
+#login input[type="submit"] {
+	width: 90%;
+	height: auto;
+	padding: 2%;
+	font-size: 35px;
+	border: 4px solid #425691;
+	background-color: #4D68A1;
+	color: #ffffff;
+	margin: 0 0 10% 0;
+	font-weight: bold;
+}
+
+#login a {
+	color: #000000;
+	text-decoration: none;
+}
+
+#login a:hover {
+	text-decoration: underline;
+}
+
+#register {
+	width: 100%;
+	margin: 10% 0 10% 0;
+	font-size: 35px;
+}
+
+#register a {
+	padding: 2%;
+	font-size: 35px;
+	border: 4px solid #425691;
+	background-color: #4D68A1;
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#footer {
+	width: 100%;
+	font-size: 30px;
+	margin: 0 0 5% 0;
+}
+
+#footer .oznam {
+	background-color: #FFECE8;
+  color: #000000;
+  border: 4px solid #975545;
+  font-size: 35px;
+  padding: 2%;
+  margin: 0 0 5% 0;
+}
+
+# {
+	
+}

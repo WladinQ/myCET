@@ -1,0 +1,41 @@
+<div id="container">
+<h1>Změna hesla</h1>
+
+
+{if $success} 
+	<p>Vaše heslo bylo změněno.</p>
+{else}
+
+	{if $force} 
+		<p>You must change your password now that you've requested.</p>
+	{/if}
+
+	{if $errors} 
+		{$errors|noescape}
+	{/if}
+
+	<form action="" method="post">
+		<table border="0px">
+			<tr>
+				<td>Staré heslo</td>
+				<td width="20px"></td>
+				<td><input class="inputtextpasstextarea" type="text" name="current_password"></td>
+			</tr>
+			<tr>
+				<td>Nové heslo</td>
+				<td width="20px"></td>
+				<td><input class="inputtextpasstextarea" type="text" name="password"></td>
+			</tr>
+			<tr>
+				<td>Nové heslo (pro kontrolu)</td>
+				<td width="20px"></td>
+				<td><input class="inputtextpasstextarea" type="text" name="password_again"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td width="20px"></td>
+				<td><input class="inputsubmitbuttons" type="submit" value="Změnit heslo"></td>
+			</tr>
+		</table>
+	</form>
+{/if}

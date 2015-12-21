@@ -1,0 +1,37 @@
+<div class="infonav">
+	<h1>{$profile_data['username']}</h1>
+	
+	{if $mujProfil}
+		<a class="profileodkaz" href="nastaveni.php">Změnit údaje</a> <a href="zmena-hesla.php">Změnit heslo</a>
+	{/if}
+
+
+	{if $prihlasen}
+		<form method="post">
+		{if $zabanovat}
+			<input type='submit' name='ban' value='Zabanovat'>
+		{/if}
+
+		{if !$req}
+			<input type='submit' name='report' value='Nahlásit profil'>
+		{else}
+			<input type='submit' name='cancelreport' value='Zrušit nahlášení'>
+		{/if}
+		</form>
+	{/if}
+	<div class="clear"></div>
+</div>
+
+{$sex}, {$vek}, {$okres}
+<br><br>
+Partnerský stav: 	{$vztah}
+
+<div class="profilebar">
+	<a href="{$profile_data['username']}?profil">O mně</a><font color="#425691"> |</font>
+	<a href="?nastenka">Nástěnka</a><font color="#425691"> |</font>
+
+	<a href="?pratele">Přátelé ({$friends})</a><font color="#425691"> |</font>
+
+	<a href="?fotoalbumy">Fotoalbumy ({$alba})</a><font color="#425691"> |</font>
+	<a href="?videoalbumy">Videoalbumy</a>
+</div>

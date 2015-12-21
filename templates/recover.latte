@@ -1,0 +1,21 @@
+<h1>Obnova hesla</h1>
+
+{if $success}
+	<p>Thanks, we've emailed you.</p>
+{else}
+	<p n:if='isset($error["emailNotExists"])'>Oops, we couldn't find that email address!</p>
+
+	<form action="" method="post">
+		<table border="0px">
+			<tr>
+				<td>Prosím, zadejte svou e-mailovou adresu:</td>
+			</tr>
+			<tr height="10px">
+				<td></td>
+			</tr>
+			<tr>
+				<td><input class="inputtextpasstextarea" type="text" name="email"> <input class="inputsubmitbuttons" type="submit" value="Obnovit"></td>
+			</tr>
+		</table>
+	</form>
+{/if}		

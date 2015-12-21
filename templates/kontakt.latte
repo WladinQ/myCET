@@ -1,0 +1,49 @@
+<div id="container-reg">
+
+     <h1>Máte dotaz nebo potřebujete poradit?</h1>
+
+    <form name="contact-form" method="post" action="">
+		<table id="contactform" border="0px">
+			<tr>
+				<td>Celé jméno</td>
+				<td width="20px"></td>
+				<td><input type="text" name="name" value=""/></td>
+			</tr>
+			<tr>
+				<td>E-mail</td>
+				<td width="20px"></td>
+				<td><input type="email" name="email" value=""/></td>
+			</tr>
+			<tr>
+				<td>Předmět</td>
+				<td width="20px"></td>
+				<td>
+					<select name="subject" required>
+						<option value="">Vyberte typ otázky</option>
+						<option value="Potřebuji poradit">Potřebuji poradit</option>
+						<option value="Technický problém">Technický problém</option>
+						<option value="Návrh na vylepšení">Návrh na vylepšení</option>
+						<option value="Jiné">Jiné</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Zpráva</td>
+				<td width="20px"></td>
+				<td><textarea name="message"></textarea></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="control" style="display:none;" /></td>
+				<td width="20px"></td>
+				<td><input class="inputsubmitbuttons" type="submit" name="submit" value="Odeslat" /></td>
+			</tr>
+		</table>
+    </form>
+                 
+        {if isset($message)}
+			<div class="message">
+                <br>
+                <h3>{$message|noescape}</h3>
+            </div>
+        {/if}
+</div>
