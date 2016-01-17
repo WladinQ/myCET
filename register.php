@@ -1,18 +1,17 @@
 <?php
 logged_in_redirect();
 
-if (empty($_POST) === false) {
-	$required_fields = array('username', 'password', 'password_recover', 'email');
-	foreach($_POST as $key=>$value) {
-		if (empty($value) && in_array($key, $required_fields) === true) {
+if (!empty($_POST)) {
+	foreach(array('username', 'password', 'password_recover', 'email') as $key) {
+		if (!isset($_POST[$key]) || empty($_POST[$key])) {
 			$errors_reg[] = '<div class="error_reg">Všechna pole jsou povinná!</div>';
-			break 1;
+			break;
 		}
 	}
 	
 	if (empty($errors_reg) === true) {
 		if (user_exists($_POST['username']) === true) {
-			$errors_reg[] = '<div class="error_reg">Omlouváme se, ale uživatelské jméno \'' . $_POST['username'] . '\' je již obsazeno.</div>';
+			$errors_reg[] = "<div class='error_reg'>Omlouváme se, ale uživatelské jméno '{$_POST['username']}' je již obsazeno.</div>";
 		}
 		if (preg_match("/\\s/", $_POST['username']) == true) {
 			$errors_reg[] = '<div class="error_reg">Vaše uživatelské jméno nesmí obsahovat žádné mezery.</div>';
@@ -31,11 +30,11 @@ if (empty($_POST) === false) {
 		}
 	}
 }
-?>
-	<?php
+?><?php
 		$latteParam["status"] = "";
 		if (isset($_GET['success']) && empty($_GET['success'])) {
-			$latteParam["status"] = '<div class="accepted_reg">Váš účet byl úspěšně zaregistrován! Prosím zkontrolujte svůj e-mail pro aktivaci vašeho účtu.</div>';
+			$latteParam["status"] = '<div class="accepted_reg">Váš účet byl úspěšně zaregistrován!
+				Prosím zkontrolujte svůj e-mail pro aktivaci vašeho účtu.</div>';
 		} else {
 			if (empty($_POST) === false && empty($errors_reg) === true) {
 				$register_data = array(

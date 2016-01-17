@@ -22,9 +22,7 @@
 	}
 	$muz = 'Muž';
 	$zena = 'Žena';
-	$sex = 'muz';
-	$sex = 'zena';
-	$latteParam["sex"] = $$profile_data['sex'];
+	$latteParam["sex"] = ${$profile_data['sex']};
 
 	$latteParam["vek"] = floor((strtotime(date('d-m-Y')) - strtotime($profile_data['bday']))/(60*60*24*365.2421896)); 
 

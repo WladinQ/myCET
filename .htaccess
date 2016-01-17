@@ -3,7 +3,8 @@ php_flag display_errors Off
 <IfDefine MYCET_LOKALNY_SERVER>
 php_flag display_errors On
 php_flag html_errors On
-php_value error_reporting 6143
+#php_value error_reporting 32767
+php_value error_reporting 24575
 <IfDefine MYCET_LOKALNY_SERVER>
 
 RewriteEngine On

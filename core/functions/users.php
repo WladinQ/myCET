@@ -92,14 +92,21 @@ function activate($email, $email_code) {
 	}
 }
 
-/* dobré */ 
+/**
+ * @param  int $user_id 
+ * @param  string $password new password
+ * @return bool           whether successful
+ */
 function change_password($user_id, $password) {
 	$user_id = (int)$user_id;
 	$password = md5($password);
 	
-	mysql_query("UPDATE `users` SET `password` = '$password', `password_recover` = 0 WHERE `user_id` = $user_id");
+	return mysql_query("UPDATE `users` SET `password` = '$password', `password_recover` = 0 WHERE `user_id` = $user_id");
 }
 
+/**
+ * @todo `register_user()` should return status constants indicating the state of success/failure of registration
+ */
 function register_user($register_data) {
 	array_walk($register_data, 'array_sanitize');
 	$register_data['password'] = md5($register_data['password']);
@@ -111,7 +118,9 @@ function register_user($register_data) {
 	email($register_data['email'], 'Aktivace účtu na myČET', "Dobrý den " . $register_data['username'] . ",\n\n Pro aktivaci účtu, kliknete zde:\n\n http://mycet.php5.sk/activate.php?email=" . $register_data['email'] . "&email_code=" . $register_data['email_code'] . "\n\n myČET.cz");
 }
 
-/* dobré */
+/**
+ * @todo should cache at least to filesystem
+ */
 function user_count() {
 	// cache
 	static $count;
@@ -158,13 +167,14 @@ function getUser($user_id, $field) {
  * @return int
  */
 function getAuthenticatedUser() {
-	return
-		loggedIn()
-			? intval($_SESSION['user_id'])
-			: 0;
+	return loggedIn() ? intval($_SESSION['user_id']) : 0;
 }
 
-/* dobré */
+/**
+ * Alias of loggedIn().
+ *
+ * @see loggedIn()
+ */
 function logged_in() {
 	return loggedIn();
 }

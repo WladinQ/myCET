@@ -22,7 +22,7 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST' && !empty($_POST)) {
 		}
 	
 		if (!$login = login($username, $password)) {
-			$errors[] = 'Tato kombinace uživatelského jména a heslo je nesprávna.<br><br>';
+			$errors[] = 'Tato kombinace uživatelského jména a hesla je nesprávna.<br><br>';
 		} else {
 			$_SESSION['user_id'] = $login;
 			header('Location: index.php');
@@ -30,7 +30,7 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST' && !empty($_POST)) {
 		}
 	}
 } else {
-	$errors[] = 'Databáze neobdržela žádné informace.<br><br>';
+	$errors[] = 'K příhlášení použijte prosím náš přihlašovací formulář.<br><br>';
 }
 
 include 'includes/overall/header.php';

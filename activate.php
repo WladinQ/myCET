@@ -12,13 +12,13 @@ if (isset($_GET['success']) === true && empty($_GET['success']) === true) {
 	$email_code = trim($_GET['email_code']);
 	
 	if (email_exists($email) === false) {
-		$errors[] = 'Oops, something went wrong, and we couldn\'t find that email address!';
+		$errors[] = 'Zadaný email v databázi myČETu neexistuje!';
 	} else if (activate($email, $email_code) === false) {
-		$errors[] = 'We had problems activating your account';
+		$errors[] = 'Nepodarilo se nám váš účet aktivovat.';
 	}
 	
 	if (empty($errors) === false) {
-		$latteParam["status"] = $false;
+		$latteParam["status"] = false;
 		$latteParam["error"] = output_errors($errors);
 	} else {
 		header('Location: activate.php?success');

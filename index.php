@@ -71,4 +71,4 @@ $latte->render('templates/index.latte', $latteParam);
 	include 'register.php';
 } 
 
-include 'includes/overall/footer.php'; ?>
+include 'includes/overall/footer.php';
